@@ -9,8 +9,10 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'You'
-runs:
-  using: "composite"
-  steps: 
-    - run: echo Hey ${{ inputs.user }}.
-      shell: bash
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - run: echo Hey ${{ inputs.user }}.
+        shell: bash
