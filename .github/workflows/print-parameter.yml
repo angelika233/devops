@@ -1,6 +1,7 @@
 name: 'Hey From a GitHub Action'
-on: push
-  branches: 
+on:
+  push:
+    branches: 
       - actions
 description: 'Greet someone'
 inputs:
