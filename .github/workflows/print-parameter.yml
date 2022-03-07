@@ -1,18 +1,26 @@
-name: 'Hey From a GitHub Action'
+ame: Mixed inputs
+
 on:
-  push:
-    branches: 
-      - actions
-description: 'Greet someone'
-inputs:
-  user:  
-    description: 'Who to greet'
-    required: true
-    default: 'You'
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include  emojis
+      environment:
+        type: environment
+
 jobs:
   greet:
     runs-on: ubuntu-latest
 
-    steps: 
-      - run: echo Hey ${{ inputs.user }}.
-        shell: bash
+    steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
